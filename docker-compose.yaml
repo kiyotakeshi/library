@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0.23
+    container_name: library-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "2wsxzaq1"
+      MYSQL_DATABASE: library
+      MYSQL_USER: library
+      MYSQL_PASSWORD: "1qazxsw2"
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - .docker/db/data:/var/lib/mysql
+      - .docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - 3306:3306
+#  redis:
+#    image: redis:6.2.6
+#    container_name: library-redis
+#    ports:
+#      - 6379:6379
+#    volumes:
+#      - .docker/redis:/data
