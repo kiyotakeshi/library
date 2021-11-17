@@ -15,4 +15,20 @@ class BookService(
     fun registerBook(book: Book): Book {
         return bookRepository.save(book)
     }
+
+    fun getBook(id: Int): Book {
+        return bookRepository.findById(id).orElseThrow()
+    }
+
+    fun updateBook(id: Int, request: Book): Book {
+        val book = bookRepository.findById(id).orElseThrow()
+        book.author = request.author
+        book.title = request.title
+        book.published = request.published
+        return bookRepository.save(book)
+    }
+
+    fun deleteBook(id: Int) {
+        return bookRepository.deleteById(id)
+    }
 }

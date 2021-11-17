@@ -6,11 +6,11 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "books")
-data class Book (
+data class Book(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int = 0,
+    val id: Int? = null,
 
     @NotNull
     var title: String = "",
