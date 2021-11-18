@@ -2,33 +2,16 @@ package com.kiyotakeshi.library.usecase
 
 import com.kiyotakeshi.library.domain.Book
 import com.kiyotakeshi.library.domain.BookRepository
-import org.springframework.stereotype.Service
 
-@Service
-class BookService(
-    private val bookRepository: BookRepository
-) {
-    fun getBooks(): List<Book> {
-        return bookRepository.findAll()
-    }
+interface BookService {
 
-    fun registerBook(book: Book): Book {
-        return bookRepository.save(book)
-    }
+    fun getBooks(): List<Book>
 
-    fun getBook(id: Int): Book {
-        return bookRepository.findById(id).orElseThrow()
-    }
+    fun registerBook(book: Book): Book
 
-    fun updateBook(id: Int, request: Book): Book {
-        val book = bookRepository.findById(id).orElseThrow()
-        book.author = request.author
-        book.title = request.title
-        book.published = request.published
-        return bookRepository.save(book)
-    }
+    fun getBook(id: Int): Book
 
-    fun deleteBook(id: Int) {
-        return bookRepository.deleteById(id)
-    }
+    fun updateBook(id: Int, request: Book): Book
+
+    fun deleteBook(id: Int)
 }

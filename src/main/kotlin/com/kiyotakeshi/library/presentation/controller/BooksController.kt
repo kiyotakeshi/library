@@ -10,27 +10,18 @@ class BooksController(
     private val bookService: BookService
 ) {
     @GetMapping
-    fun getBooks(): List<Book> {
-        return bookService.getBooks()
-    }
+    fun getBooks(): List<Book> = bookService.getBooks()
 
     @PostMapping
-    fun registerBook(@RequestBody request: Book): Book {
-        return bookService.registerBook(request)
-    }
+    fun registerBook(@RequestBody request: Book): Book = bookService.registerBook(request)
 
     @GetMapping("/{bookId}")
-    fun getBook(@PathVariable("bookId") id: Int): Book {
-        return bookService.getBook(id)
-    }
+    fun getBook(@PathVariable("bookId") id: Int): Book = bookService.getBook(id)
 
     @PutMapping("/{bookId}")
-    fun updateBook(@PathVariable("bookId") id: Int, @RequestBody request: Book): Book {
-        return bookService.updateBook(id,request)
-    }
+    fun updateBook(@PathVariable("bookId") id: Int, @RequestBody request: Book): Book =
+        bookService.updateBook(id,request)
 
     @DeleteMapping("/{bookId}")
-    fun deleteBook(@PathVariable("bookId") id: Int) {
-        return bookService.deleteBook(id)
-    }
+    fun deleteBook(@PathVariable("bookId") id: Int) = bookService.deleteBook(id)
 }
