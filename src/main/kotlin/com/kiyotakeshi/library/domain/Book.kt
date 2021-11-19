@@ -9,9 +9,6 @@ import javax.validation.constraints.Size
 @Entity
 @Table(name = "books")
 class Book(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null,
-
     // @see https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets
     @field:Size(min = 2, message = "Invalid field: too short")
     var title: String,
@@ -22,6 +19,11 @@ class Book(
     var published: LocalDate?
 
 ) {
+    // id は DB で自動採番するためコンストラクタに含めない
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Int? = null
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
