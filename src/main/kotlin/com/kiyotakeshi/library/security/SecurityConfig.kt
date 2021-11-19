@@ -41,6 +41,8 @@ class SecurityConfig(
             .loginProcessingUrl("/login")
             .usernameParameter("email")
             .passwordParameter("pass")
+            .successHandler(LibraryAuthenticationSuccessHandler())
+            .failureHandler(LibraryAuthenticationFailureHandler())
 
         http.exceptionHandling().authenticationEntryPoint(LibraryAuthenticationEntryPoint())
     }
