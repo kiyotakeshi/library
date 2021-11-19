@@ -36,6 +36,8 @@ dependencies {
 	implementation("org.flywaydb:flyway-core")
 
 	// https://mvnrepository.com/artifact/commons-io/commons-io
+	implementation("commons-io:commons-io:2.11.0")
+
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("mysql:mysql-connector-java:8.0.23")
