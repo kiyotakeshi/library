@@ -7,9 +7,6 @@ import javax.validation.constraints.Size
 @Entity
 @Table(name = "users")
 class User(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int? = null,
     @field:Email
     val email: String,
     @field:Size(min = 6, message = "Password is too short")
@@ -20,6 +17,11 @@ class User(
     @Column(length = 20)
     val roleType: RoleType
 ) {
+    // id は DB で自動採番するためコンストラクタに含めない
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Int? = null
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

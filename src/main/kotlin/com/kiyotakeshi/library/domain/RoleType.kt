@@ -1,6 +1,6 @@
 package com.kiyotakeshi.library.domain
 
 enum class RoleType {
-    ADMIN,
-    USER
+    ROLE_ADMIN,
+    ROLE_USER
 }
