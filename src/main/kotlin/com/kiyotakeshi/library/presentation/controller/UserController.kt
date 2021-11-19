@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.*
 class UserController(
     private val userService: UserService
 ) {
-    // admin しかできない処理にする
-    @GetMapping
-    fun getUsers(): List<User> = userService.getUsers()
-
     // TODO: ユーザのマイページに使う？ `/{email}` は変える
     // TODO: Spring Security で自身のものしか見れないように制御する
     @GetMapping("/{email}")
@@ -22,12 +18,4 @@ class UserController(
 
     // TODO: プロフィール編集などできるようにするのであれば
     // @PutMapping
-
-    // admin しかできない処理にする
-    @PostMapping
-    fun registerUser(@RequestBody user: User): User = userService.register(user)
-
-    // admin しかできない処理にする
-    @DeleteMapping("/{userId}")
-    fun deleteUser(@PathVariable userId: Int) = userService.delete(userId)
 }
