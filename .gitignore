@@ -37,3 +37,4 @@ out/
 .vscode/
 .docker
 cookie.txt
+openapi/openapi.json

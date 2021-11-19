@@ -32,7 +32,8 @@ class GenerateOasFile {
             // .andDo(MockMvcResultHandlers.print())
             .andDo { result: MvcResult ->
                 FileUtils.writeStringToFile(
-                    File("build/docs/oas.json"),
+                    // File("build/docs/oas.json"),
+                    File("openapi/openapi.json"),
                     String(result.response.contentAsByteArray, StandardCharsets.UTF_8),
                     Charset.defaultCharset(),
                     false
