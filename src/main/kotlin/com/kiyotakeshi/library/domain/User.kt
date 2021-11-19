@@ -1,16 +1,22 @@
 package com.kiyotakeshi.library.domain
 
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.Size
 
 @Entity
 @Table(name = "users")
+@ApiModel(description = "User")
 class User(
+    @ApiModelProperty(value = "ログイン時にパスワードと共に使用される", example = "test@example.com", required = true)
     @field:Email
     val email: String,
+
     @field:Size(min = 6, message = "Password is too short")
     val password: String,
+
     val name: String,
 
     @Enumerated(EnumType.STRING)
@@ -20,6 +26,7 @@ class User(
     // id は DB で自動採番するためコンストラクタに含めない
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "User の ID は DB で自動採番するため指定しても使われない", example = "null")
     val id: Int? = null
 
     override fun equals(other: Any?): Boolean {
