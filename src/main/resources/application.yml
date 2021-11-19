@@ -4,3 +4,8 @@ spring:
     username: "library"
     password: "1qazxsw2"
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+
+# パラメータの値をログに表示 ex.) binding parameter [1] as [INTEGER] - [1]
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
