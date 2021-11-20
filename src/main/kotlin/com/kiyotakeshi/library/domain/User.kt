@@ -8,7 +8,7 @@ import javax.validation.constraints.Size
 
 @Entity
 @Table(name = "users")
-@ApiModel(description = "User")
+@ApiModel(description = "ユーザ情報")
 class User(
     @ApiModelProperty(value = "ログイン時にパスワードと共に使用される", example = "test@example.com", required = true)
     @field:Email
@@ -26,7 +26,7 @@ class User(
     // id は DB で自動採番するためコンストラクタに含めない
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(value = "User の ID は DB で自動採番するため指定しても使われない", example = "null")
+    @ApiModelProperty(value = "DB で自動採番するため指定しても使われない", example = "null")
     val id: Int? = null
 
     override fun equals(other: Any?): Boolean {
