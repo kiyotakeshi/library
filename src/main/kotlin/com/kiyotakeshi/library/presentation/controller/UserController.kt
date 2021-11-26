@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(path = ["/users"], produces = ["application/json"])
 class UserController(
     private val userService: UserService
 ) {

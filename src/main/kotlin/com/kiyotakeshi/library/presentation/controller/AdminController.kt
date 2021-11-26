@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 
 @Tag(name = "admin-controller", description = "**`ADMIN_ROLE` のユーザしか実施できない**")
 @RestController
-@RequestMapping("/admin")
+@RequestMapping(path = ["/admin"], produces = ["application/json"])
 class AdminController(
     private val userService: UserService,
     private val categoryService: CategoryService
@@ -19,7 +19,7 @@ class AdminController(
         "ユーザ一覧取得", notes = "DB にて保存されているユーザ一覧を表示。"
                 + "\n ただしパスワードは `BCryptPasswordEncoder` によりハッシュ化している"
     )
-    @ApiResponse(code = 200, message = "OK", response = User::class)
+    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = User::class, responseContainer = "List")])
     @GetMapping("/users")
     fun getUsers(): List<User> = userService.getUsers()
 
