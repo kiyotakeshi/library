@@ -16,13 +16,21 @@ class Book(
     @field:Size(min = 2, message = "Invalid field: too short")
     var author: String,
 
-    var published: LocalDate?
-
+    var published: LocalDate?,
 ) {
     // id は DB で自動採番するためコンストラクタに含めない
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null
+
+    @ManyToMany
+    @JoinTable(
+        name = "book_categories",
+        joinColumns = [JoinColumn(name = "book_id")],
+        inverseJoinColumns = [JoinColumn(name = "category_id")]
+    )
+    var categories: MutableList<Category>? = mutableListOf();
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -1,5 +1,6 @@
 package com.kiyotakeshi.library.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
@@ -17,4 +18,8 @@ data class Category(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "DB で自動採番するため指定しても使われない", example = "null")
     val id: Int? = null
+
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
+    var books: MutableList<Book> = mutableListOf();
 }
