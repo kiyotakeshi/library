@@ -6,6 +6,7 @@ import com.kiyotakeshi.library.domain.User
 import com.kiyotakeshi.library.presentation.model.BookCategoryRequest
 import com.kiyotakeshi.library.presentation.model.NewCategoryRequest
 import com.kiyotakeshi.library.presentation.model.NewCategoryResponse
+import com.kiyotakeshi.library.usecase.BookService
 import com.kiyotakeshi.library.usecase.CategoryService
 import com.kiyotakeshi.library.usecase.UserService
 import io.swagger.annotations.*
@@ -17,8 +18,12 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping(path = ["/admin"], produces = ["application/json"])
 class AdminController(
     private val userService: UserService,
-    private val categoryService: CategoryService
+    private val categoryService: CategoryService,
+    private val bookService: BookService
 ) {
+    // -------------------------
+    // /users
+    // -------------------------
     @ApiOperation(
         "ユーザ一覧取得", notes = "DB にて保存されているユーザ一覧を表示。"
                 + "\n ただしパスワードは `BCryptPasswordEncoder` によりハッシュ化している"
@@ -41,6 +46,9 @@ class AdminController(
     @DeleteMapping("/users/{userId}")
     fun deleteUser(@PathVariable userId: Int) = userService.delete(userId)
 
+    // -------------------------
+    // /categories
+    // -------------------------
     @ApiOperation("カテゴリーの新規登録", notes = "登録済みのものを含む、カテゴリ名を複数指定してリクエスト可能。")
     @ApiResponses(value = [ApiResponse(code = 200, message = "新規登録されたカテゴリの一覧を返す", response = NewCategoryResponse::class, responseContainer = "List")])
     @PostMapping("/categories")
@@ -48,6 +56,22 @@ class AdminController(
         @ApiParam(value = "新規追加するカテゴリー", required = true)
         @RequestBody category: List<NewCategoryRequest>
     ): List<NewCategoryResponse> = categoryService.registerCategory(category)
+
+    // -------------------------
+    // /books
+    // -------------------------
+    @ApiOperation("書籍の新規登録")
+    @PostMapping("/books")
+    fun registerBook(@RequestBody request: Book): Book = bookService.registerBook(request)
+
+    @ApiOperation("書籍の更新")
+    @PutMapping("/books/{bookId}")
+    fun updateBook(@PathVariable("bookId") id: Int, @RequestBody request: Book): Book =
+        bookService.updateBook(id, request)
+
+    @ApiOperation("書籍の削除")
+    @DeleteMapping("/books/{bookId}")
+    fun deleteBook(@PathVariable("bookId") id: Int) = bookService.deleteBook(id)
 
     @ApiOperation("書籍にカテゴリーを登録(洗い替え)")
     @ApiResponses(value = [ApiResponse(code = 200, message = "リクエストのカテゴリで洗い替えた書籍の情報を返す", response = Book::class)])
