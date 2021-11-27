@@ -16,8 +16,8 @@ class CategoryController(
     private val categoryService: CategoryService
 ) {
 
-    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Category::class, responseContainer = "List")])
     @ApiOperation("カテゴリ一覧の取得")
+    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Category::class, responseContainer = "List")])
     @GetMapping
     fun getCategories(): List<Category> = categoryService.getCategories()
 }
