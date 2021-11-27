@@ -41,12 +41,13 @@ class AdminController(
     @DeleteMapping("/users/{userId}")
     fun deleteUser(@PathVariable userId: Int) = userService.delete(userId)
 
-    @ApiOperation("カテゴリーの新規登録")
+    @ApiOperation("カテゴリーの新規登録", notes = "登録済みのものを含む、カテゴリ名を複数指定してリクエスト可能。")
+    @ApiResponses(value = [ApiResponse(code = 200, message = "新規登録されたカテゴリの一覧を返す", response = NewCategoryResponse::class, responseContainer = "List")])
     @PostMapping("/categories")
     fun registerCategory(
         @ApiParam(value = "新規追加するカテゴリー", required = true)
-        @RequestBody category: Category
-    ): Category = categoryService.registerCategory(category)
+        @RequestBody category: List<NewCategoryRequest>
+    ): List<NewCategoryResponse> = categoryService.registerCategory(category)
 
     @ApiOperation("書籍にカテゴリーを登録(洗い替え)")
     @ApiResponses(value = [ApiResponse(code = 200, message = "リクエストのカテゴリで洗い替えた書籍の情報を返す", response = Book::class)])

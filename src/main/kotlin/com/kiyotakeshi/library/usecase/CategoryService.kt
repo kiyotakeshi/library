@@ -8,5 +8,6 @@ import com.kiyotakeshi.library.presentation.model.NewCategoryResponse
 
 interface CategoryService {
     fun getCategories(): List<Category>
+    fun registerCategory(categories: List<NewCategoryRequest>): List<NewCategoryResponse>
     fun registerBookCategories(bookId: Int, categories: List<BookCategoryRequest>): Book
 }
