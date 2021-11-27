@@ -20,21 +20,9 @@ class BooksController(
     @GetMapping
     fun getBooks(): List<Book> = bookService.getBooks()
 
-    @ApiOperation("書籍の新規登録")
-    @PostMapping
-    fun registerBook(@RequestBody request: Book): Book = bookService.registerBook(request)
-
     @ApiOperation("書籍の取得")
     @GetMapping("/{bookId}")
     fun getBook(@PathVariable("bookId") id: Int): Book = bookService.getBook(id)
 
-    @ApiOperation("書籍の更新")
-    @PutMapping("/{bookId}")
-    fun updateBook(@PathVariable("bookId") id: Int, @RequestBody request: Book): Book =
-        bookService.updateBook(id, request)
 
-    // TODO: Admin 権限のみ実行できるようにする
-    @ApiOperation("書籍の削除")
-    @DeleteMapping("/{bookId}")
-    fun deleteBook(@PathVariable("bookId") id: Int) = bookService.deleteBook(id)
 }
