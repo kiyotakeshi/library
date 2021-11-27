@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CategoryRepository : JpaRepository<Category, Int> {
+    fun findAllByNameIn(name: List<String>): List<Category>
 }

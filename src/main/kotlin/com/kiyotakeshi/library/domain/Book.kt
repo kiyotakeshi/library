@@ -31,6 +31,10 @@ class Book(
     )
     var categories: MutableList<Category>? = mutableListOf();
 
+    fun deleteAllAndRegisterCategories(categories: List<Category>){
+        this.categories?.clear()
+        this.categories?.addAll(categories)
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

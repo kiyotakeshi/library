@@ -1,7 +1,11 @@
 package com.kiyotakeshi.library.presentation.controller
 
+import com.kiyotakeshi.library.domain.Book
 import com.kiyotakeshi.library.domain.Category
 import com.kiyotakeshi.library.domain.User
+import com.kiyotakeshi.library.presentation.model.BookCategoryRequest
+import com.kiyotakeshi.library.presentation.model.NewCategoryRequest
+import com.kiyotakeshi.library.presentation.model.NewCategoryResponse
 import com.kiyotakeshi.library.usecase.CategoryService
 import com.kiyotakeshi.library.usecase.UserService
 import io.swagger.annotations.*
@@ -23,6 +27,8 @@ class AdminController(
     @GetMapping("/users")
     fun getUsers(): List<User> = userService.getUsers()
 
+    // TODO: ResponseEntity を使用する
+    // TODO: status code を適切なものを設定する
     @ApiOperation("ユーザの新規登録")
     @PostMapping("/users")
     fun registerUser(
@@ -41,4 +47,12 @@ class AdminController(
         @ApiParam(value = "新規追加するカテゴリー", required = true)
         @RequestBody category: Category
     ): Category = categoryService.registerCategory(category)
+
+    @ApiOperation("書籍にカテゴリーを登録(洗い替え)")
+    @ApiResponses(value = [ApiResponse(code = 200, message = "リクエストのカテゴリで洗い替えた書籍の情報を返す", response = Book::class)])
+    @PutMapping("/books/{bookId}/categories")
+    fun registerBookCategories(
+        @ApiParam(value = "カテゴリーを登録する書籍のID", required = true) @PathVariable bookId: Int,
+        @ApiParam(value = "書籍に登録するカテゴリー", required = true) @RequestBody categories: List<BookCategoryRequest>
+    ): Book = categoryService.registerBookCategories(bookId, categories)
 }
