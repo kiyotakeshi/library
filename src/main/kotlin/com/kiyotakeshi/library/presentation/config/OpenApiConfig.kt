@@ -21,6 +21,7 @@ class OpenApiConfig {
             .paths(PathSelectors.any())
             .build()
             .apiInfo(metaData())
+            .useDefaultResponseMessages(false)
     }
 
     private fun metaData(): ApiInfo? {
@@ -28,7 +29,7 @@ class OpenApiConfig {
             .title("library")
             .description("Spring Boot REST API using kotlin")
             .version("0.0.1")
-            .contact(Contact("kiyotakeshi", "https://github.com/kiyotakeshi", "kiyotatakeshi.work@gmail.com"))
+            .contact(Contact("kiyotakeshi", "https://github.com/kiyotakeshi/library", "kiyotatakeshi.work@gmail.com"))
             .build()
     }
 }
