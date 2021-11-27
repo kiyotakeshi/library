@@ -37,24 +37,28 @@ class AdminController(
     @ApiOperation("ユーザの新規登録")
     @PostMapping("/users")
     fun registerUser(
-        @ApiParam(value = "新規追加するユーザ", required = true)
-        @RequestBody user: User
-    ): User =
-        userService.register(user)
+        @ApiParam(value = "新規追加するユーザ", required = true) @RequestBody user: User
+    ): User = userService.register(user)
 
     @ApiOperation("ユーザ一の削除")
     @DeleteMapping("/users/{userId}")
-    fun deleteUser(@PathVariable userId: Int) = userService.delete(userId)
+    fun deleteUser(@ApiParam(value = "ユーザID", required = true) @PathVariable userId: Int) = userService.delete(userId)
 
     // -------------------------
     // /categories
     // -------------------------
     @ApiOperation("カテゴリーの新規登録", notes = "登録済みのものを含む、カテゴリ名を複数指定してリクエスト可能。")
-    @ApiResponses(value = [ApiResponse(code = 200, message = "新規登録されたカテゴリの一覧を返す", response = NewCategoryResponse::class, responseContainer = "List")])
+    @ApiResponses(
+        value = [ApiResponse(
+            code = 200,
+            message = "新規登録されたカテゴリの一覧を返す",
+            response = NewCategoryResponse::class,
+            responseContainer = "List"
+        )]
+    )
     @PostMapping("/categories")
     fun registerCategory(
-        @ApiParam(value = "新規追加するカテゴリー", required = true)
-        @RequestBody category: List<NewCategoryRequest>
+        @ApiParam(value = "新規追加するカテゴリー", required = true) @RequestBody category: List<NewCategoryRequest>
     ): List<NewCategoryResponse> = categoryService.registerCategory(category)
 
     // -------------------------
@@ -66,8 +70,11 @@ class AdminController(
 
     @ApiOperation("書籍の更新")
     @PutMapping("/books/{bookId}")
-    fun updateBook(@PathVariable("bookId") id: Int, @RequestBody request: Book): Book =
-        bookService.updateBook(id, request)
+    fun updateBook(
+        @ApiParam(value = "書籍ID", required = true) @PathVariable("bookId") id: Int,
+        // TODO: 更新用に model 分ける
+        @ApiParam(value = "更新する書籍の情報", required = true) @RequestBody request: Book
+    ): Book = bookService.updateBook(id, request)
 
     @ApiOperation("書籍の削除")
     @DeleteMapping("/books/{bookId}")
