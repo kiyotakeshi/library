@@ -3,10 +3,7 @@ package com.kiyotakeshi.library.usecase
 import com.kiyotakeshi.library.domain.entity.Book
 import com.kiyotakeshi.library.domain.repository.BookRepository
 import com.kiyotakeshi.library.domain.repository.CategoryRepository
-import com.kiyotakeshi.library.presentation.model.BookDetailResponse
-import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
-import com.kiyotakeshi.library.presentation.model.ReviewResponse
-import com.kiyotakeshi.library.presentation.model.ReviewUserResponse
+import com.kiyotakeshi.library.presentation.model.*
 import org.springframework.stereotype.Service
 
 //
@@ -26,7 +23,7 @@ class BookServiceImpl(
                 it.title,
                 it.author,
                 it.published,
-                it.categories,
+                it.categories?.map { CategoryResponse(it.id, it.name) },
                 it.calculateAverageRating()
             )
         }
@@ -52,7 +49,7 @@ class BookServiceImpl(
             book.title,
             book.author,
             book.published,
-            book.categories,
+            book.categories?.map { CategoryResponse(it.id, it.name) },
 //            listOf(
 //                ReviewResponse(
 //                    1, "soso", "this is for beginner.", 3.5,

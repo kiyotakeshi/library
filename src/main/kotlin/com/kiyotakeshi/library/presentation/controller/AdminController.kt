@@ -31,6 +31,7 @@ class AdminController(
     @GetMapping("/users")
     fun getUsers(): List<User> = userService.getUsers()
 
+    // TODO: 新規登録用の model にする
     // TODO: ResponseEntity を使用する
     // TODO: status code を適切なものを設定する
     @ApiOperation("ユーザの新規登録")
@@ -63,10 +64,12 @@ class AdminController(
     // -------------------------
     // /books
     // -------------------------
+    // TODO: 新規登録用の request,response の model を使用する
     @ApiOperation("書籍の新規登録")
     @PostMapping("/books")
     fun registerBook(@RequestBody request: Book): Book = bookService.registerBook(request)
 
+    // TODO: 新規更新用の request,response の model を使用する(新規登録と共通かも)
     @ApiOperation("書籍の更新")
     @PutMapping("/books/{bookId}")
     fun updateBook(
@@ -79,6 +82,7 @@ class AdminController(
     @DeleteMapping("/books/{bookId}")
     fun deleteBook(@PathVariable("bookId") id: Int) = bookService.deleteBook(id)
 
+    // TODO: レスポンスの model 見直す
     @ApiOperation("書籍にカテゴリーを登録(洗い替え)")
     @ApiResponses(value = [ApiResponse(code = 200, message = "リクエストのカテゴリで洗い替えた書籍の情報を返す", response = Book::class)])
     @PutMapping("/books/{bookId}/categories")

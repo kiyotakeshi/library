@@ -1,7 +1,5 @@
 package com.kiyotakeshi.library.presentation.model
 
-import com.kiyotakeshi.library.domain.entity.Category
-import com.kiyotakeshi.library.domain.entity.Review
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDate
@@ -20,8 +18,8 @@ data class BookDetailResponse(
     @ApiModelProperty(value = "出版日", example = "2021-11-18")
     val published: LocalDate?,
 
-    @ApiModelProperty(value = "カテゴリ", example = "kotlin")
-    val categories: List<Category>?,
+    @ApiModelProperty(value = "カテゴリ")
+    val categories: List<CategoryResponse>?,
 
     @ApiModelProperty(value = "レビュー")
     val reviews: List<ReviewResponse>?

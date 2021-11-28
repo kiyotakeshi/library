@@ -15,6 +15,6 @@ data class ReviewResponse(
     @ApiModelProperty(value = "星(1~5(0.5刻み) で表現できる)", example = "3.5", required = true)
     val rating: Double,
 
-    @ApiModelProperty(value = "レビュー投稿者", example = "mike", required = true)
+    @ApiModelProperty(value = "レビュー投稿者", required = true)
     val author: ReviewUserResponse
 )

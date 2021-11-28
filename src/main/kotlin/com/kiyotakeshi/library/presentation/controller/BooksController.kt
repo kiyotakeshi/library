@@ -16,7 +16,7 @@ class BooksController(
     private val bookService: BookService
 ) {
     @ApiOperation("書籍一覧の取得")
-    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
+    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = BookSummaryResponse::class, responseContainer = "List")])
     @GetMapping
     fun getBooks(): List<BookSummaryResponse> = bookService.getBooks()
 
@@ -29,7 +29,7 @@ class BooksController(
     ): List<Book> = bookService.getBooksByCategory(categoryId)
 
     @ApiOperation("書籍詳細の取得")
-    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class)])
+    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = BookDetailResponse::class)])
     @GetMapping("/{bookId}")
     fun getBook(
         @ApiParam(value = "書籍ID", required = true, example = "1") @PathVariable("bookId") id: Int

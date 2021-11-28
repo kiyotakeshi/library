@@ -5,6 +5,7 @@ import com.kiyotakeshi.library.domain.repository.BookRepository
 import com.kiyotakeshi.library.domain.entity.Category
 import com.kiyotakeshi.library.domain.repository.CategoryRepository
 import com.kiyotakeshi.library.presentation.model.BookCategoryRequest
+import com.kiyotakeshi.library.presentation.model.CategoryResponse
 import com.kiyotakeshi.library.presentation.model.NewCategoryRequest
 import com.kiyotakeshi.library.presentation.model.NewCategoryResponse
 import org.springframework.stereotype.Service
@@ -15,13 +16,15 @@ class CategoryServiceImpl(
     private val bookRepository: BookRepository
 ) : CategoryService {
 
-    override fun getCategories(): List<Category> {
-        return categoryRepository.findAll()
+    override fun getCategories(): List<CategoryResponse> {
+        return categoryRepository.findAll().map {
+            CategoryResponse(it.id, it.name)
+        }
     }
 
     override fun registerCategory(request: List<NewCategoryRequest>): List<NewCategoryResponse> {
         // @see https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/map.html
-        val requestCategoryNames = request.map { it.name } // ex.) Kotlin, Java, Test, JavaScript
+        val requestCategoryNames = request.map { it.name }.distinct() // ex.) Kotlin, Java, Test, JavaScript
 
         val foundCategoryNames =
             categoryRepository.findAllByNameIn(requestCategoryNames).map { it.name }  // ex.) Kotlin, Java

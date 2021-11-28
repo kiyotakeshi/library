@@ -17,7 +17,7 @@ data class Category(
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(value = "DB で自動採番")
+    @ApiModelProperty(value = "DB で自動採番", example = "1")
     val id: Int? = null
 
     @ManyToMany(mappedBy = "categories")
