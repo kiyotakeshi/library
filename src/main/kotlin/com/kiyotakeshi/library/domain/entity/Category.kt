@@ -1,6 +1,7 @@
-package com.kiyotakeshi.library.domain
+package com.kiyotakeshi.library.domain.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.kiyotakeshi.library.domain.entity.Book
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
@@ -16,7 +17,7 @@ data class Category(
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ApiModelProperty(value = "DB で自動採番")
+    @ApiModelProperty(value = "DB で自動採番", example = "1")
     val id: Int? = null
 
     @ManyToMany(mappedBy = "categories")

@@ -1,7 +1,7 @@
 package com.kiyotakeshi.library.security
 
 import com.kiyotakeshi.library.domain.RoleType.*
-import com.kiyotakeshi.library.domain.UserRepository
+import com.kiyotakeshi.library.domain.repository.UserRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity

@@ -1,9 +1,7 @@
 package com.kiyotakeshi.library.usecase
 
-import com.kiyotakeshi.library.domain.User
-import com.kiyotakeshi.library.domain.UserRepository
-import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import com.kiyotakeshi.library.domain.entity.User
+import com.kiyotakeshi.library.domain.repository.UserRepository
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -14,7 +12,7 @@ class UserServiceImpl(
 ) : UserService {
 
     override fun getUserByEmail(email: String): User {
-        return userRepository.findByEmail(email)
+        return userRepository.findByEmail(email).orElseThrow()
     }
 
     override fun register(request: User): User {

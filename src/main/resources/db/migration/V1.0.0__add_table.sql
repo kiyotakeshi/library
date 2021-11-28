@@ -44,3 +44,22 @@ alter table book_categories
 alter table book_categories
     add constraint foreign key (book_id)
         references books (id);
+
+create table reviews
+(
+    id          integer auto_increment,
+    description varchar(10000),
+    rating      double not null,
+    title       varchar(100),
+    author_id   integer,
+    book_id     integer,
+    primary key (id)
+);
+
+alter table reviews
+    add constraint foreign key (author_id)
+        references users (id);
+
+alter table reviews
+    add constraint foreign key (book_id)
+        references books (id);

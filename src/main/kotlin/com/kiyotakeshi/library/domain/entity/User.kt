@@ -1,5 +1,7 @@
-package com.kiyotakeshi.library.domain
+package com.kiyotakeshi.library.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.kiyotakeshi.library.domain.RoleType
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
@@ -9,7 +11,7 @@ import javax.validation.constraints.Size
 @Entity
 @Table(name = "users")
 @ApiModel(description = "ユーザ情報")
-class User(
+data class User(
 
     @ApiModelProperty(value = "ログイン時にパスワードと共に使用される", example = "test@example.com", required = true)
     @field:Email
@@ -21,6 +23,7 @@ class User(
         example = "$2a$10dxKi.R0LKtFufMdeEmn/YuFRSQn3gSk702mTevwLUm2wfseL6GBha",
         required = true
     )
+    @JsonIgnore
     val password: String,
 
     @ApiModelProperty(value = "ユーザ名", example = "mike", required = true)
@@ -36,31 +39,12 @@ class User(
     @ApiModelProperty(value = "DB で自動採番")
     val id: Int? = null
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as User
-
-        if (id != other.id) return false
-        if (email != other.email) return false
-        if (password != other.password) return false
-        if (name != other.name) return false
-        if (roleType != other.roleType) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id ?: 0
-        result = 31 * result + email.hashCode()
-        result = 31 * result + password.hashCode()
-        result = 31 * result + name.hashCode()
-        result = 31 * result + roleType.hashCode()
-        return result
-    }
+    // TODO: user を削除する場合も review は消さない。 deactivated-user として残す
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    var reviews: MutableList<Review> = mutableListOf()
 
     override fun toString(): String {
-        return "User(id=$id, email='$email', password='$password', name='$name', roleType=$roleType)"
+        return "User(email='$email', password='$password', name='$name', roleType=$roleType, id=$id)"
     }
 }

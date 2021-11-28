@@ -1,13 +1,16 @@
 package com.kiyotakeshi.library.presentation.controller
 
-import com.kiyotakeshi.library.domain.Book
-import com.kiyotakeshi.library.domain.User
+import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.domain.entity.Review
+import com.kiyotakeshi.library.presentation.model.BookDetailResponse
+import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
+import com.kiyotakeshi.library.presentation.model.ReviewRequest
+import com.kiyotakeshi.library.presentation.model.ReviewResponse
 import com.kiyotakeshi.library.usecase.BookService
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
-import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -15,24 +18,36 @@ import org.springframework.web.bind.annotation.*
 class BooksController(
     private val bookService: BookService
 ) {
-    // TODO: レビューの星情報はレスポンスに含める
     @ApiOperation("書籍一覧の取得")
-    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
+    @ApiResponses(
+        value = [ApiResponse(
+            code = 200,
+            message = "OK",
+            response = BookSummaryResponse::class,
+            responseContainer = "List"
+        )]
+    )
     @GetMapping
-    fun getBooks(): List<Book> = bookService.getBooks()
+    fun getBooks(): List<BookSummaryResponse> = bookService.getBooks()
 
+    // TODO: BookSummaryResponse を返すよう修正
     @ApiOperation("カテゴリ別の書籍一覧の取得")
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
     @GetMapping("/categories/{categoryId}")
     fun getBooksByCategory(
-        @ApiParam(value = "閲覧したいカテゴリーのID", required = true) @PathVariable categoryId: Int
+        @ApiParam(value = "閲覧したいカテゴリーのID", required = true, example = "1") @PathVariable categoryId: Int
     ): List<Book> = bookService.getBooksByCategory(categoryId)
 
-    // TODO: レビュー内容はこちらのリクエストで返す
-    @ApiOperation("書籍の取得")
-    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class)])
+    @ApiOperation("書籍詳細の取得")
+    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = BookDetailResponse::class)])
     @GetMapping("/{bookId}")
     fun getBook(
-        @ApiParam(value = "書籍ID", required = true) @PathVariable("bookId") id: Int
-    ): Book = bookService.getBook(id)
+        @ApiParam(value = "書籍ID", required = true, example = "1") @PathVariable("bookId") id: Int
+    ): BookDetailResponse = bookService.getBook(id)
+
+    @ApiOperation("レビューの投稿")
+    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = ReviewResponse::class)])
+    @PostMapping("/{bookId}/reviews")
+    fun postReview(@PathVariable("bookId") bookId: Int, @RequestBody request: ReviewRequest): ReviewResponse =
+        bookService.postReview(bookId, request)
 }
