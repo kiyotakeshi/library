@@ -27,10 +27,9 @@ class BookServiceImpl(
             BookSummaryResponse(
                 it.id,
                 it.title,
-                // TODO: #26
-                it.authors,
+                it.authors?.map { author -> BookAuthorResponse(author.id, author.name) },
                 it.published,
-                it.categories?.map { CategoryResponse(it.id, it.name) },
+                it.categories?.map { category -> CategoryResponse(category.id, category.name) },
                 it.calculateAverageRating()
             )
         }
@@ -54,16 +53,9 @@ class BookServiceImpl(
         return BookDetailResponse(
             book.id,
             book.title,
-            // TODO: #26
-            book.authors,
+            book.authors?.map { BookAuthorResponse(it.id, it.name) },
             book.published,
             book.categories?.map { CategoryResponse(it.id, it.name) },
-//            listOf(
-//                ReviewResponse(
-//                    1, "soso", "this is for beginner.", 3.5,
-//                    UserResponse(1, "mike")
-//                )
-//            )
             reviews
         )
     }
@@ -72,7 +64,6 @@ class BookServiceImpl(
 
     override fun updateBook(id: Int, request: Book): Book {
         val book = bookRepository.findById(id).orElseThrow()
-        // TODO: #26
         book.authors = request.authors
         book.title = request.title
         book.published = request.published

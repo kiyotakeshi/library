@@ -18,13 +18,11 @@ data class BookSummaryResponse(
     @ApiModelProperty(value = "タイトル", example = "hello java")
     val title: String,
 
-    @ApiModelProperty(value = "筆者", example = "popcorn")
-    val author: List<Author>?,
+    val author: List<BookAuthorResponse>?,
 
     @ApiModelProperty(value = "出版日", example = "2021-11-18")
     val published: LocalDate?,
 
-    @ApiModelProperty(value = "カテゴリ")
     val categories: List<CategoryResponse>?,
 
     // TODO: レビューの件数を追加
