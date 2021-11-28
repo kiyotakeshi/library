@@ -1,5 +1,6 @@
 package com.kiyotakeshi.library.presentation.model
 
+import com.kiyotakeshi.library.domain.entity.Author
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import java.time.LocalDate
@@ -13,7 +14,7 @@ data class BookDetailResponse(
     val title: String,
 
     @ApiModelProperty(value = "筆者", example = "popcorn")
-    val author: String,
+    val author: List<Author>?,
 
     @ApiModelProperty(value = "出版日", example = "2021-11-18")
     val published: LocalDate?,

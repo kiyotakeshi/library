@@ -5,16 +5,25 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import org.springframework.test.context.TestConstructor
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 @DataJpaTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-internal class BookTest(
+internal class AuthorTest(
     private var em: TestEntityManager
 ) {
     @Test
     internal fun mapping() {
-        val book = Book("aws professional", null, LocalDate.of(2021, 11, 20))
+        val author1 = Author("yamada taro")
+        val savedAuthor1 = em.persistAndFlush(author1)
+
+        val author2 = Author("tanaka ichiro")
+        val savedAuthor2 = em.persistAndFlush(author2)
+
+        val book = Book(
+            title = "aws professional",
+            authors = mutableListOf(savedAuthor1, savedAuthor2),
+            published = LocalDate.of(2021, 11, 20)
+        )
         em.persistAndFlush(book)
     }
 }

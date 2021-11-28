@@ -17,9 +17,13 @@ data class Book(
     @field:Size(min = 2, message = "Invalid field: too short")
     var title: String,
 
-    @ApiModelProperty(value = "筆者", example = "popcorn", required = true)
-    @field:Size(min = 2, message = "Invalid field: too short")
-    var author: String,
+    @ManyToMany
+    @JoinTable(
+        name = "book_authors",
+        joinColumns = [JoinColumn(name = "book_id")],
+        inverseJoinColumns = [JoinColumn(name = "author_id")]
+    )
+    var authors: MutableList<Author>? = mutableListOf(),
 
     @ApiModelProperty(value = "出版日", example = "2021-11-18", required = false)
     var published: LocalDate?,
@@ -58,7 +62,7 @@ data class Book(
     }
 
     override fun toString(): String {
-        return "Book(title='$title', author='$author', published=$published, id=$id, categories=$categories, reviews=$reviews)"
+        return "Book(title='$title', authors=$authors, published=$published, id=$id, categories=$categories, reviews=$reviews)"
     }
 }
 

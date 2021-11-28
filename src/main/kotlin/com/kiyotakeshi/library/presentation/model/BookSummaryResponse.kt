@@ -1,6 +1,7 @@
 package com.kiyotakeshi.library.presentation.model
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
+import com.kiyotakeshi.library.domain.entity.Author
 import com.kiyotakeshi.library.domain.entity.Category
 import com.kiyotakeshi.library.domain.entity.Review
 import io.swagger.annotations.ApiModel
@@ -18,7 +19,7 @@ data class BookSummaryResponse(
     val title: String,
 
     @ApiModelProperty(value = "筆者", example = "popcorn")
-    val author: String,
+    val author: List<Author>?,
 
     @ApiModelProperty(value = "出版日", example = "2021-11-18")
     val published: LocalDate?,

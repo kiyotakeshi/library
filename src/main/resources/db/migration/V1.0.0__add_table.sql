@@ -1,8 +1,14 @@
+create table authors
+(
+    id   integer auto_increment,
+    name varchar(100),
+    primary key (id)
+);
+
 create table books
 (
     id        int auto_increment,
     title     varchar(200) charset utf8 not null,
-    author    varchar(100) charset utf8 not null,
     published date null,
     constraint books_id_uindex
         unique (id)
@@ -12,6 +18,20 @@ create table books
 
 alter table books
     add primary key (id);
+
+create table book_authors
+(
+    book_id   integer not null,
+    author_id integer not null
+);
+
+alter table book_authors
+    add constraint foreign key (author_id)
+        references authors (id);
+
+alter table book_authors
+    add constraint foreign key (book_id)
+        references books (id);
 
 create table users
 (

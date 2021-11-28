@@ -22,5 +22,5 @@ data class Category(
 
     @ManyToMany(mappedBy = "categories")
     @JsonIgnore
-    var books: MutableList<Book> = mutableListOf();
+    var books: MutableList<Book> = mutableListOf()
 }
