@@ -1,10 +1,11 @@
 package com.kiyotakeshi.library.usecase
 
 import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
 
 interface BookService {
 
-    fun getBooks(): List<Book>
+    fun getBooks(): List<BookSummaryResponse>
 
     fun getBooksByCategory(categoryId: Int): List<Book>
 

@@ -3,6 +3,7 @@ package com.kiyotakeshi.library.usecase
 import com.kiyotakeshi.library.domain.entity.Book
 import com.kiyotakeshi.library.domain.repository.BookRepository
 import com.kiyotakeshi.library.domain.repository.CategoryRepository
+import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
 import org.springframework.stereotype.Service
 
 //
@@ -13,7 +14,20 @@ class BookServiceImpl(
     private val categoryRepository: CategoryRepository
 ) : BookService {
 
-    override fun getBooks(): List<Book> = bookRepository.findAll()
+    override fun getBooks(): List<BookSummaryResponse> {
+        val foundBooks: MutableList<Book> = bookRepository.findAll()
+
+        return foundBooks.map {
+            BookSummaryResponse(
+                it.id,
+                it.title,
+                it.author,
+                it.published,
+                it.categories,
+                it.calculateAverageRating()
+            )
+        }
+    }
 
     override fun getBooksByCategory(categoryId: Int): List<Book> {
         return categoryRepository.findById(categoryId).orElseThrow().books

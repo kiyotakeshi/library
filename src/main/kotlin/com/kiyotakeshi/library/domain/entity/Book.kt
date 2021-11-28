@@ -49,6 +49,10 @@ data class Book(
         this.categories?.addAll(categories)
     }
 
+    fun calculateAverageRating(): Double {
+        return this.reviews.map { it.rating }.average()
+    }
+
     fun deleteReview(review: Review) {
         this.reviews.remove(review)
     }

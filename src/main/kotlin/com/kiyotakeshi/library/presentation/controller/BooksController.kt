@@ -1,6 +1,7 @@
 package com.kiyotakeshi.library.presentation.controller
 
 import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
 import com.kiyotakeshi.library.usecase.BookService
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
@@ -13,11 +14,10 @@ import org.springframework.web.bind.annotation.*
 class BooksController(
     private val bookService: BookService
 ) {
-    // TODO: レビューの星情報はレスポンスに含める
     @ApiOperation("書籍一覧の取得")
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
     @GetMapping
-    fun getBooks(): List<Book> = bookService.getBooks()
+    fun getBooks(): List<BookSummaryResponse> = bookService.getBooks()
 
     @ApiOperation("カテゴリ別の書籍一覧の取得")
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
