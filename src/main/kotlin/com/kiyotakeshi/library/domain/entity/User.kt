@@ -1,5 +1,7 @@
 package com.kiyotakeshi.library.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.kiyotakeshi.library.domain.RoleType
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -36,6 +38,11 @@ data class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "DB で自動採番")
     val id: Int? = null
+
+    // TODO: user を削除する場合も review は消さない。 deactivated-user として残す
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    var reviews: MutableList<Review> = mutableListOf()
 
     override fun toString(): String {
         return "User(email='$email', password='$password', name='$name', roleType=$roleType, id=$id)"

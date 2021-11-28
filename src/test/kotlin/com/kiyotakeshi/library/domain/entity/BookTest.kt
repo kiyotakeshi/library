@@ -1,19 +1,21 @@
-package com.kiyotakeshi.library.domain
+package com.kiyotakeshi.library.domain.entity
 
-import com.kiyotakeshi.library.domain.entity.User
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import org.springframework.test.context.TestConstructor
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @DataJpaTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-internal class UserTest(
+internal class BookTest(
     private var em: TestEntityManager
 ) {
     @Test
     internal fun mapping() {
-        val user = User(email = "test@example.com", password = "1qazxsw2", name = "mike", roleType = RoleType.ROLE_USER)
-        em.persistAndFlush(user)
+        val book = Book("aws professional", "kendrick west", LocalDate.of(2021, 11, 20))
+        em.persistAndFlush(book)
     }
 }

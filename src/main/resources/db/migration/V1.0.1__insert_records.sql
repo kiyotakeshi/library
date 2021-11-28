@@ -20,3 +20,17 @@ values (1, 1),
        (2, 2),
        (2, 3),
        (2, 4);
+
+insert into reviews (id, author_id, book_id, description, rating, title)
+values (1, 1, 1,
+        'This books gives me beneficial information about kotlin basic grammar and why use kotlin.',
+        4.5,
+        'awesome'),
+       (2, 2, 1,
+        'This book is too easy for me.I have experience of to write kotlin 1 year, so this book target is beginner of kotlin',
+        2.5,
+        'this book for kotlin beginner'),
+       (3, 1, 2,
+        'This books gives me beneficial information about java basic grammar and why java uses in enterprise for a long time.',
+        4.0,
+        'good');
