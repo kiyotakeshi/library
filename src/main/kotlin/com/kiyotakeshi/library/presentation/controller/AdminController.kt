@@ -65,6 +65,7 @@ class AdminController(
     // /books
     // -------------------------
     // TODO: 新規登録用の request,response の model を使用する
+    // TODO: #26 筆者を複数指定できるようになったので対応する
     @ApiOperation("書籍の新規登録")
     @PostMapping("/books")
     fun registerBook(@RequestBody request: Book): Book = bookService.registerBook(request)
@@ -78,7 +79,7 @@ class AdminController(
         @ApiParam(value = "更新する書籍の情報", required = true) @RequestBody request: Book
     ): Book = bookService.updateBook(id, request)
 
-    @ApiOperation("書籍の削除")
+    @ApiOperation("書籍の削除(関連するレビューも削除される)")
     @DeleteMapping("/books/{bookId}")
     fun deleteBook(@PathVariable("bookId") id: Int) = bookService.deleteBook(id)
 

@@ -2,7 +2,6 @@ package com.kiyotakeshi.library.usecase
 
 import com.kiyotakeshi.library.domain.entity.Book
 import com.kiyotakeshi.library.domain.entity.Review
-import com.kiyotakeshi.library.domain.entity.User
 import com.kiyotakeshi.library.domain.repository.BookRepository
 import com.kiyotakeshi.library.domain.repository.CategoryRepository
 import com.kiyotakeshi.library.domain.repository.ReviewRepository
@@ -10,8 +9,6 @@ import com.kiyotakeshi.library.domain.repository.UserRepository
 import com.kiyotakeshi.library.presentation.model.*
 import org.springframework.stereotype.Service
 
-//
-// https://stackoverflow.com/a/28693263
 @Service
 class BookServiceImpl(
     private val bookRepository: BookRepository,
