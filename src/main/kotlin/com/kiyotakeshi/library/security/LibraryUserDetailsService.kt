@@ -1,8 +1,8 @@
 package com.kiyotakeshi.library.security
 
 import com.kiyotakeshi.library.domain.RoleType
-import com.kiyotakeshi.library.domain.User
-import com.kiyotakeshi.library.domain.UserRepository
+import com.kiyotakeshi.library.domain.entity.User
+import com.kiyotakeshi.library.domain.repository.UserRepository
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.security.core.userdetails.UserDetails

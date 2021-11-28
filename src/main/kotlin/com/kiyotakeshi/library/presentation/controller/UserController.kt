@@ -1,9 +1,8 @@
 package com.kiyotakeshi.library.presentation.controller
 
-import com.kiyotakeshi.library.domain.User
+import com.kiyotakeshi.library.domain.entity.User
 import com.kiyotakeshi.library.usecase.UserService
 import io.swagger.annotations.ApiOperation
-import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 
 @RestController

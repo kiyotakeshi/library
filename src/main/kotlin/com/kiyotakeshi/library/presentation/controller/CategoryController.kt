@@ -1,7 +1,6 @@
 package com.kiyotakeshi.library.presentation.controller
 
-import com.kiyotakeshi.library.domain.Book
-import com.kiyotakeshi.library.domain.Category
+import com.kiyotakeshi.library.domain.entity.Category
 import com.kiyotakeshi.library.usecase.CategoryService
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse

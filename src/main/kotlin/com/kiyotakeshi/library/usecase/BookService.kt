@@ -1,7 +1,6 @@
 package com.kiyotakeshi.library.usecase
 
-import com.kiyotakeshi.library.domain.Book
-import com.kiyotakeshi.library.domain.BookRepository
+import com.kiyotakeshi.library.domain.entity.Book
 
 interface BookService {
 

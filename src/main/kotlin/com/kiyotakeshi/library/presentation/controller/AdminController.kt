@@ -1,8 +1,7 @@
 package com.kiyotakeshi.library.presentation.controller
 
-import com.kiyotakeshi.library.domain.Book
-import com.kiyotakeshi.library.domain.Category
-import com.kiyotakeshi.library.domain.User
+import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.domain.entity.User
 import com.kiyotakeshi.library.presentation.model.BookCategoryRequest
 import com.kiyotakeshi.library.presentation.model.NewCategoryRequest
 import com.kiyotakeshi.library.presentation.model.NewCategoryResponse

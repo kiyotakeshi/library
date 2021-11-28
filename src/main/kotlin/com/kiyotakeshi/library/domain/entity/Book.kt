@@ -1,14 +1,12 @@
-package com.kiyotakeshi.library.domain
+package com.kiyotakeshi.library.domain.entity
 
-import org.hibernate.Hibernate
-import org.jetbrains.annotations.NotNull
 import java.time.LocalDate
 import javax.persistence.*
 import javax.validation.constraints.Size
 
 @Entity
 @Table(name = "books")
-class Book(
+data class Book(
     // @see https://kotlinlang.org/docs/annotations.html#annotation-use-site-targets
     @field:Size(min = 2, message = "Invalid field: too short")
     var title: String,
@@ -36,18 +34,8 @@ class Book(
         this.categories?.addAll(categories)
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
-        other as Book
-
-        return id != null && id == other.id
-    }
-
-    override fun hashCode(): Int = javaClass.hashCode()
-
     override fun toString(): String {
-        return this::class.simpleName + "(id = $id , title = $title , author = $author , published = $published )"
+        return "Book(title='$title', author='$author', published=$published, id=$id, categories=$categories)"
     }
 }
 

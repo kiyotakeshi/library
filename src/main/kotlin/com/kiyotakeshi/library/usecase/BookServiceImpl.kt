@@ -1,8 +1,8 @@
 package com.kiyotakeshi.library.usecase
 
-import com.kiyotakeshi.library.domain.Book
-import com.kiyotakeshi.library.domain.BookRepository
-import com.kiyotakeshi.library.domain.CategoryRepository
+import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.domain.repository.BookRepository
+import com.kiyotakeshi.library.domain.repository.CategoryRepository
 import org.springframework.stereotype.Service
 
 //

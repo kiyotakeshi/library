@@ -1,9 +1,9 @@
 package com.kiyotakeshi.library.usecase
 
-import com.kiyotakeshi.library.domain.Book
-import com.kiyotakeshi.library.domain.BookRepository
-import com.kiyotakeshi.library.domain.Category
-import com.kiyotakeshi.library.domain.CategoryRepository
+import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.domain.repository.BookRepository
+import com.kiyotakeshi.library.domain.entity.Category
+import com.kiyotakeshi.library.domain.repository.CategoryRepository
 import com.kiyotakeshi.library.presentation.model.BookCategoryRequest
 import com.kiyotakeshi.library.presentation.model.NewCategoryRequest
 import com.kiyotakeshi.library.presentation.model.NewCategoryResponse

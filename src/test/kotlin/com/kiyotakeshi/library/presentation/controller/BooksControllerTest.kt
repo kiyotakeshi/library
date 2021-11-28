@@ -2,7 +2,7 @@
 //
 //import com.fasterxml.jackson.databind.ObjectMapper
 //import com.fasterxml.jackson.module.kotlin.registerKotlinModule
-//import com.kiyotakeshi.library.domain.Book
+//import com.kiyotakeshi.library.domain.entity.Book
 //import com.kiyotakeshi.library.usecase.BookService
 //import com.nhaarman.mockitokotlin2.mock
 //import com.nhaarman.mockitokotlin2.whenever

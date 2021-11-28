@@ -1,6 +1,6 @@
 package com.kiyotakeshi.library.usecase
 
-import com.kiyotakeshi.library.domain.User
+import com.kiyotakeshi.library.domain.entity.User
 
 interface UserService {
     fun getUserByEmail(email: String): User

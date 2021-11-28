@@ -1,13 +1,11 @@
 package com.kiyotakeshi.library.presentation.controller
 
-import com.kiyotakeshi.library.domain.Book
-import com.kiyotakeshi.library.domain.User
+import com.kiyotakeshi.library.domain.entity.Book
 import com.kiyotakeshi.library.usecase.BookService
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiParam
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
-import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -25,7 +23,7 @@ class BooksController(
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
     @GetMapping("/categories/{categoryId}")
     fun getBooksByCategory(
-        @ApiParam(value = "閲覧したいカテゴリーのID", required = true) @PathVariable categoryId: Int
+        @ApiParam(value = "閲覧したいカテゴリーのID", required = true, example = "1") @PathVariable categoryId: Int
     ): List<Book> = bookService.getBooksByCategory(categoryId)
 
     // TODO: レビュー内容はこちらのリクエストで返す
@@ -33,6 +31,6 @@ class BooksController(
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class)])
     @GetMapping("/{bookId}")
     fun getBook(
-        @ApiParam(value = "書籍ID", required = true) @PathVariable("bookId") id: Int
+        @ApiParam(value = "書籍ID", required = true, example = "1") @PathVariable("bookId") id: Int
     ): Book = bookService.getBook(id)
 }

@@ -1,6 +1,7 @@
-package com.kiyotakeshi.library.domain
+package com.kiyotakeshi.library.domain.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.kiyotakeshi.library.domain.entity.Book
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
