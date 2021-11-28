@@ -29,8 +29,7 @@ data class Review(
 
     @ApiModelProperty(value = "レビュー対象の本", example = "", required = true)
     @ManyToOne
-    @JsonBackReference
-//    @JsonIgnore
+    @JsonIgnore
     val book: Book
 ) {
     @Id

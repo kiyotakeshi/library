@@ -1,6 +1,7 @@
 package com.kiyotakeshi.library.presentation.controller
 
 import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.presentation.model.BookDetailResponse
 import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
 import com.kiyotakeshi.library.usecase.BookService
 import io.swagger.annotations.ApiOperation
@@ -19,6 +20,7 @@ class BooksController(
     @GetMapping
     fun getBooks(): List<BookSummaryResponse> = bookService.getBooks()
 
+    // TODO: BookSummaryResponse を返すよう修正
     @ApiOperation("カテゴリ別の書籍一覧の取得")
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
     @GetMapping("/categories/{categoryId}")
@@ -26,11 +28,10 @@ class BooksController(
         @ApiParam(value = "閲覧したいカテゴリーのID", required = true, example = "1") @PathVariable categoryId: Int
     ): List<Book> = bookService.getBooksByCategory(categoryId)
 
-    // TODO: レビュー内容はこちらのリクエストで返す
-    @ApiOperation("書籍の取得")
+    @ApiOperation("書籍詳細の取得")
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class)])
     @GetMapping("/{bookId}")
     fun getBook(
         @ApiParam(value = "書籍ID", required = true, example = "1") @PathVariable("bookId") id: Int
-    ): Book = bookService.getBook(id)
+    ): BookDetailResponse = bookService.getBook(id)
 }

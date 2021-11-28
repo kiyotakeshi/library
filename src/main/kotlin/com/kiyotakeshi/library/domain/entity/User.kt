@@ -1,7 +1,7 @@
 package com.kiyotakeshi.library.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.kiyotakeshi.library.domain.RoleType
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -24,6 +24,7 @@ data class User(
         example = "$2a$10dxKi.R0LKtFufMdeEmn/YuFRSQn3gSk702mTevwLUm2wfseL6GBha",
         required = true
     )
+    @JsonIgnore
     val password: String,
 
     @ApiModelProperty(value = "ユーザ名", example = "mike", required = true)

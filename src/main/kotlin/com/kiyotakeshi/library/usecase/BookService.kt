@@ -1,6 +1,7 @@
 package com.kiyotakeshi.library.usecase
 
 import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.presentation.model.BookDetailResponse
 import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
 
 interface BookService {
@@ -9,7 +10,7 @@ interface BookService {
 
     fun getBooksByCategory(categoryId: Int): List<Book>
 
-    fun getBook(id: Int): Book
+    fun getBook(id: Int): BookDetailResponse
 
     fun registerBook(book: Book): Book
 
