@@ -12,7 +12,7 @@ class UserServiceImpl(
 ) : UserService {
 
     override fun getUserByEmail(email: String): User {
-        return userRepository.findByEmail(email)
+        return userRepository.findByEmail(email).orElseThrow()
     }
 
     override fun register(request: User): User {

@@ -26,6 +26,8 @@ data class BookSummaryResponse(
     @ApiModelProperty(value = "カテゴリ")
     val categories: List<CategoryResponse>?,
 
+    // TODO: レビューの件数を追加
+
     @ApiModelProperty(value = "レビューの星(rating)の平均", example = "3.5")
     val star: Double?
 )

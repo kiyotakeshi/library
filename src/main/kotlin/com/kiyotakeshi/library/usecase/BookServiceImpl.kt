@@ -1,8 +1,12 @@
 package com.kiyotakeshi.library.usecase
 
 import com.kiyotakeshi.library.domain.entity.Book
+import com.kiyotakeshi.library.domain.entity.Review
+import com.kiyotakeshi.library.domain.entity.User
 import com.kiyotakeshi.library.domain.repository.BookRepository
 import com.kiyotakeshi.library.domain.repository.CategoryRepository
+import com.kiyotakeshi.library.domain.repository.ReviewRepository
+import com.kiyotakeshi.library.domain.repository.UserRepository
 import com.kiyotakeshi.library.presentation.model.*
 import org.springframework.stereotype.Service
 
@@ -11,7 +15,9 @@ import org.springframework.stereotype.Service
 @Service
 class BookServiceImpl(
     private val bookRepository: BookRepository,
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val reviewRepository: ReviewRepository,
+    private val userRepository: UserRepository
 ) : BookService {
 
     override fun getBooks(): List<BookSummaryResponse> {
@@ -71,4 +77,26 @@ class BookServiceImpl(
     }
 
     override fun deleteBook(id: Int) = bookRepository.deleteById(id)
+
+    override fun postReview(id: Int, request: ReviewRequest): ReviewResponse {
+        val book: Book = bookRepository.findById(id).orElseThrow()
+        val user = userRepository.findByEmail(request.author.email).orElseThrow()
+
+        val newReview = Review(
+            request.title,
+            request.description,
+            request.rating,
+            user,
+            book
+        )
+        val savedReview = reviewRepository.save(newReview)
+
+        return ReviewResponse(
+            savedReview.id,
+            savedReview.title,
+            savedReview.description,
+            savedReview.rating,
+            ReviewUserResponse(savedReview.author.id, savedReview.author.name)
+        )
+    }
 }

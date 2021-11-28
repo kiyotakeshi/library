@@ -36,7 +36,7 @@ data class Book(
         joinColumns = [JoinColumn(name = "book_id")],
         inverseJoinColumns = [JoinColumn(name = "category_id")]
     )
-    var categories: MutableList<Category>? = mutableListOf();
+    var categories: MutableList<Category>? = mutableListOf()
 
     // book を削除する場合は紐づく review から先に削除する
     // (review table の外部キー制約も指定がある) orphanRemoval を指定

@@ -1,6 +1,5 @@
 package com.kiyotakeshi.library.domain.entity
 
-import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.kiyotakeshi.library.domain.RoleType
 import io.swagger.annotations.ApiModel
