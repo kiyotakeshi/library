@@ -17,22 +17,22 @@ data class Book(
     @field:Size(min = 2, message = "Invalid field: too short")
     var title: String,
 
-    @ManyToMany
-    @JoinTable(
-        name = "book_authors",
-        joinColumns = [JoinColumn(name = "book_id")],
-        inverseJoinColumns = [JoinColumn(name = "author_id")]
-    )
-    var authors: MutableList<Author>? = mutableListOf(),
-
     @ApiModelProperty(value = "出版日", example = "2021-11-18", required = false)
-    var published: LocalDate?,
+    var published: LocalDate?
 ) {
     // id は DB で自動採番するためコンストラクタに含めない
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "DB で自動採番")
     val id: Int? = null
+
+    @ManyToMany
+    @JoinTable(
+        name = "book_authors",
+        joinColumns = [JoinColumn(name = "book_id")],
+        inverseJoinColumns = [JoinColumn(name = "author_id")]
+    )
+    var authors: MutableList<Author>? = mutableListOf()
 
     @ManyToMany
     @JoinTable(

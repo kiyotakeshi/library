@@ -57,7 +57,10 @@ class BookServiceImpl(
         )
     }
 
-    override fun registerBook(book: Book): Book = bookRepository.save(book)
+    override fun registerBook(request: NewBookRequest): NewBookResponse {
+        val savedBook = bookRepository.save(Book(request.title, request.published))
+        return NewBookResponse(savedBook.id, savedBook.title, savedBook.published)
+    }
 
     override fun updateBook(id: Int, request: Book): Book {
         val book = bookRepository.findById(id).orElseThrow()

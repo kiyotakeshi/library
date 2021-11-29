@@ -2,9 +2,7 @@ package com.kiyotakeshi.library.presentation.controller
 
 import com.kiyotakeshi.library.domain.entity.Book
 import com.kiyotakeshi.library.domain.entity.User
-import com.kiyotakeshi.library.presentation.model.BookCategoryRequest
-import com.kiyotakeshi.library.presentation.model.NewCategoryRequest
-import com.kiyotakeshi.library.presentation.model.NewCategoryResponse
+import com.kiyotakeshi.library.presentation.model.*
 import com.kiyotakeshi.library.usecase.BookService
 import com.kiyotakeshi.library.usecase.CategoryService
 import com.kiyotakeshi.library.usecase.UserService
@@ -64,11 +62,10 @@ class AdminController(
     // -------------------------
     // /books
     // -------------------------
-    // TODO: 新規登録用の request,response の model を使用する
-    // TODO: #26 筆者を複数指定できるようになったので対応する
     @ApiOperation("書籍の新規登録")
+    @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = NewBookResponse::class)])
     @PostMapping("/books")
-    fun registerBook(@RequestBody request: Book): Book = bookService.registerBook(request)
+    fun registerBook(@RequestBody request: NewBookRequest): NewBookResponse = bookService.registerBook(request)
 
     // TODO: 新規更新用の request,response の model を使用する(新規登録と共通かも)
     @ApiOperation("書籍の更新")

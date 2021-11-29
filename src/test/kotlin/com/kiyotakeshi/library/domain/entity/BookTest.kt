@@ -14,7 +14,7 @@ internal class BookTest(
 ) {
     @Test
     internal fun mapping() {
-        val book = Book("aws professional", null, LocalDate.of(2021, 11, 20))
+        val book = Book("aws professional", LocalDate.of(2021, 11, 20))
         em.persistAndFlush(book)
     }
 }

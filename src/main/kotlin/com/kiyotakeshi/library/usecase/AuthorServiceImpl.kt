@@ -1,6 +1,7 @@
 package com.kiyotakeshi.library.usecase
 
 import com.kiyotakeshi.library.domain.repository.AuthorRepository
+import com.kiyotakeshi.library.presentation.model.AuthorResponse
 import com.kiyotakeshi.library.presentation.model.BookAuthorResponse
 import com.kiyotakeshi.library.presentation.model.BookSummaryResponse
 import com.kiyotakeshi.library.presentation.model.CategoryResponse
@@ -10,6 +11,13 @@ import org.springframework.stereotype.Service
 class AuthorServiceImpl(
     private val authorRepository: AuthorRepository
 ) : AuthorService {
+
+    override fun getAuthors(): List<AuthorResponse> {
+        return authorRepository.findAll().map {
+            AuthorResponse(it.id, it.name)
+        }
+    }
+
     override fun getBooksByAuthor(authorId: Int): List<BookSummaryResponse> {
         val author = authorRepository.findById(authorId).orElseThrow()
 

@@ -17,10 +17,7 @@ internal class ReviewTest(
         val user = User("mike.popcorn@example.com", "1qazxsw2", "mike", RoleType.ROLE_USER)
         em.persistAndFlush(user)
 
-        val author1 = Author("yamada taro")
-        val savedAuthor1 = em.persistAndFlush(author1)
-
-        val book = Book("aws professional", mutableListOf(savedAuthor1), LocalDate.of(2021, 11, 20))
+        val book = Book("aws professional", LocalDate.of(2021, 11, 20))
         em.persistAndFlush(book)
 
         val review = Review(

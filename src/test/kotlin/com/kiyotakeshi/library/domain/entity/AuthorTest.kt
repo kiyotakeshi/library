@@ -21,7 +21,6 @@ internal class AuthorTest(
 
         val book = Book(
             title = "aws professional",
-            authors = mutableListOf(savedAuthor1, savedAuthor2),
             published = LocalDate.of(2021, 11, 20)
         )
         em.persistAndFlush(book)
