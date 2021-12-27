@@ -13,7 +13,7 @@ interface BookService {
 
     fun registerBook(request: NewBookRequest): NewBookResponse
 
-    fun updateBook(id: Int, request: Book): Book
+    fun updateBook(id: Int, request: BookUpdateRequest): Book
 
     fun deleteBook(id: Int)
 

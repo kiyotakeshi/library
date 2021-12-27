@@ -67,13 +67,15 @@ class AdminController(
     @PostMapping("/books")
     fun registerBook(@RequestBody request: NewBookRequest): NewBookResponse = bookService.registerBook(request)
 
-    // TODO: 新規更新用の request,response の model を使用する(新規登録と共通かも)
+    // TODO: WIP 更新の実装
+    // この単位が大きすぎる、書籍のカテゴリの更新、作者の更新などを分ける??
+    // ただそうするとエンドポイントが無数に増える...
     @ApiOperation("書籍の更新")
     @PutMapping("/books/{bookId}")
     fun updateBook(
         @ApiParam(value = "書籍ID", required = true) @PathVariable("bookId") id: Int,
         // TODO: 更新用に model 分ける
-        @ApiParam(value = "更新する書籍の情報", required = true) @RequestBody request: Book
+        @ApiParam(value = "更新する書籍の情報", required = true) @RequestBody request: BookUpdateRequest
     ): Book = bookService.updateBook(id, request)
 
     @ApiOperation("書籍の削除(関連するレビューも削除される)")

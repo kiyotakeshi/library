@@ -30,7 +30,7 @@ class BooksController(
     @GetMapping
     fun getBooks(): List<BookSummaryResponse> = bookService.getBooks()
 
-    // TODO: BookSummaryResponse を返すよう修正
+    // TODO: WIP BookSummaryResponse を返すよう修正
     @ApiOperation("カテゴリ別の書籍一覧の取得")
     @ApiResponses(value = [ApiResponse(code = 200, message = "OK", response = Book::class, responseContainer = "List")])
     @GetMapping("/categories/{categoryId}")

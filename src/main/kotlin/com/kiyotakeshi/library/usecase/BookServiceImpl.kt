@@ -1,11 +1,9 @@
 package com.kiyotakeshi.library.usecase
 
+import com.kiyotakeshi.library.domain.entity.Author
 import com.kiyotakeshi.library.domain.entity.Book
 import com.kiyotakeshi.library.domain.entity.Review
-import com.kiyotakeshi.library.domain.repository.BookRepository
-import com.kiyotakeshi.library.domain.repository.CategoryRepository
-import com.kiyotakeshi.library.domain.repository.ReviewRepository
-import com.kiyotakeshi.library.domain.repository.UserRepository
+import com.kiyotakeshi.library.domain.repository.*
 import com.kiyotakeshi.library.presentation.model.*
 import org.springframework.stereotype.Service
 
@@ -14,7 +12,8 @@ class BookServiceImpl(
     private val bookRepository: BookRepository,
     private val categoryRepository: CategoryRepository,
     private val reviewRepository: ReviewRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val authorRepository: AuthorRepository,
 ) : BookService {
 
     override fun getBooks(): List<BookSummaryResponse> {
@@ -58,13 +57,16 @@ class BookServiceImpl(
     }
 
     override fun registerBook(request: NewBookRequest): NewBookResponse {
+        // TODO: 同じタイトルの本が存在しないか確認
         val savedBook = bookRepository.save(Book(request.title, request.published))
         return NewBookResponse(savedBook.id, savedBook.title, savedBook.published)
     }
 
-    override fun updateBook(id: Int, request: Book): Book {
+    override fun updateBook(id: Int, request: BookUpdateRequest): Book {
         val book = bookRepository.findById(id).orElseThrow()
-        book.authors = request.authors
+        val authors: List<Author>? = request.authors?.let { authorRepository.findAllByNameIn(it.map { it.name }) }
+        // TODO: WIP: このあたりどうしたものか...
+        book.authors = authors as MutableList<Author>?
         book.title = request.title
         book.published = request.published
         return bookRepository.save(book)
